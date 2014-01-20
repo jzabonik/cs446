@@ -1,0 +1,164 @@
+/*
+ *	static footer site: http://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height
+ *	variables:		I used variables to change and maintain the font specifics. Mostly used were color and size because they were changed in the document.
+ *	nesting:		I used nesting a lot. Best visuals are in body and header 
+ *	partials:		I used the a partial for the font style sheet called blackjack
+ *	mixins:			I just used the setupfont mixin from the sass guide to do fonts of header and body. I made a couple more mixins, but I only used those once each
+ *	inheritance:	I used inheritance to set up the graystyle of the header and sidebar. I also used a centerlayout to center both the login and the sidebar  in the right column of the body
+ *	operations: 	I used operations to calculate width% for the left and right columns of the body
+*/
+
+@import "compass/reset";
+@import "blackjack";
+
+//create your basic variables
+$body-font-family: blackjackregular, sans-serif;
+$body-font-color: black;
+$body-font-size: 15px;
+$body-font-weight: normal;
+$body-font-style: normal;
+
+
+/* Working in ems is annoying. Think in pixels by using this handy function, emCalc(#px). 
+*  Full credit of this function to ZURB's Foundation Framework 4
+*/
+@function emCalc($pxWidth) {
+  @return $pxWidth / $body-font-size * 1em;
+}
+
+// made a mixin for basic spacing needs
+@mixin spacing ($pixels) {
+	padding-bottom: $pixels;
+	padding-top: $pixels;
+	padding-left: $pixels;
+	padding-right: $pixels;
+	margin-left: $pixels;
+	margin-right: $pixels;
+	margin-top: $pixels;
+	margin-bottom: $pixels;
+}
+
+// mixin for features that you want to have a specific border-radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+//create your mixin to setup the font to be used
+@mixin setupFont(
+$family:$body-font-family, //if a parameter, aka argument, is not passed in, it has a fallback to $body-font-*
+$color:$body-font-color, 
+$size:$body-font-size, 
+$weight:$body-font-weight, 
+$style:$body-font-style
+){
+  //Sass allows for "nesting," which allows for you to nest selectors/properties 
+  font:{
+    family: $family;
+    size: emCalc($size); //convert px passed in to em
+    weight: $weight;
+    style: $style;
+  }
+  color: $color;
+}
+
+// section styling
+.graystyle {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: gray;
+}
+
+// centering layout for divs, images, etc.
+.centerlayout {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+//setup your body class, if for nothing else so the em units actually base from the default amount of 15px, instead of the browser's default font size
+body{
+  @include setupFont;
+  font-size: $body-font-size; //this needs to be a px value
+  font-family: blackjackregular;
+  
+  #container {	// holds the left and right columns of the body
+	width: 100%;
+	height: 100%;
+  }
+  
+  #leftside {	// holds the information of the body
+	float: left;
+	width: 60%;
+  }
+  #rightside {	// holds the login and the sidebar
+	font-family: Verdana, sans-serif;
+	float: left;
+	width: 40%;
+	#login {	// form for users to login
+		width: 1 / 2 * 100% + 1%;
+		fieldset{
+			border: 2px solid gray;
+			padding-bottom: 4px;
+		}
+		@extend .centerlayout;
+	}
+	#sidebar {	// cotains the picture and links
+		@extend .centerlayout;
+		@extend .graystyle;
+		width: 1 / 2 * 100% - 5%;
+		img{
+			@extend .centerlayout;
+			padding-bottom: 4px;
+		}
+		text-align: center;
+	}
+  }
+}
+
+//make any text in a header twice as large as the body text, the color a hair lighter, and bold
+// header will contain the title and the navigation bar
+header{
+   position: relative;
+   height: 15%;
+   @include spacing(2px);	// using the spacing mixin
+   @extend .graystyle;	// inheriting the graystyle
+   @include setupFont($size: $body-font-size*2, $color: lighten($body-font-color, 10%), $weight: bold);   // using the font mixin
+   #title{
+	float: left;
+	margin-left: 15px;
+	margin-top: 50px;
+   }
+   #navigation{	// contains links to different contain on the site
+		font-family: Verdana, sans-serif;
+	   position: absolute;
+	   bottom: 5px;
+	   left: 50%;
+	   nav {
+		  padding-bottom: 2px;
+		  a {
+			color: red;
+			background-color: white;
+			@include border-radius(10px);
+			font-size: $body-font-size;
+			font-weight: none;
+			padding: 6px 12px;
+			text-decoration: none;
+		  }
+		}
+	}
+}
+
+footer{	// sticky footer
+	clear:both;
+	height: 3%;
+	width: 100%;
+	position: absolute;
+    bottom: 3;
+	text-align: center;
+	padding-top: 8px;
+	background-color: lightgray;
+}
