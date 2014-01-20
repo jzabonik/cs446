@@ -8,14 +8,14 @@
 
 class Player
   MAX_HEALTH = 20	# maximum health for a warrior
-  FIGHT_THRESHHOLD = 14	# when you want to just go for the kill. otherwise you could get caught up in retreating to gain health over and over again
+  @@fight_threshhold = MAX_HEALTH * 0.7	# when you want to just go for the kill. otherwise you could get caught up in retreating to gain health over and over again
   @health = MAX_HEALTH	# @health keeps track of the current warrior health to see if they took damage last turn
   @hit_wall = false		# determines whether the warrior has seen a wall before
   @in_middle = false	# indicates that the player is not next to a wall to start off with
   
   def play_turn(warrior)
 	if @hit_wall || @in_middle
-		take_action(warrior)
+		look_around(warrior)
 	else
 		if  warrior.feel(:backward).wall?
 			# go forward
@@ -32,23 +32,41 @@ class Player
 	@health = warrior.health
   end
   
+  def look_around(warrior)
+    @attack_type = "melee"
+	warrior_sight = warrior.look(:backward)
+	warrior_sight.each { |object|
+		if object.to_s == "Captive"
+			break
+		elsif object.to_s == "Wizard"
+			@attack_type = "range"
+			break
+		end
+	}
+	take_action(warrior)
+  end
+  
   def take_action(warrior)
-	if warrior.feel.empty?
-		if warrior.health == MAX_HEALTH || @health > warrior.health
-			if @health > warrior.health && warrior.health < FIGHT_THRESHHOLD
-				warrior.walk!(:backward)
+	if @attack_type == "melee"
+		if warrior.feel.empty?
+			if warrior.health == MAX_HEALTH || @health > warrior.health
+				if @health > warrior.health && warrior.health < @@fight_threshhold
+					warrior.walk!(:backward)
+				else
+					warrior.walk!
+				end
 			else
-				warrior.walk!
+				warrior.rest!
 			end
 		else
-			warrior.rest!
+			if warrior.feel.captive?
+				warrior.rescue!
+			else
+				warrior.attack!
+			end
 		end
 	else
-		if warrior.feel.captive?
-			warrior.rescue!
-		else
-			warrior.attack!
-		end
+		warrior.shoot!
 	end
   end
 end
