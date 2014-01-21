@@ -12,6 +12,7 @@ class Player
   @health = MAX_HEALTH	# @health keeps track of the current warrior health to see if they took damage last turn
   @hit_wall = false		# determines whether the warrior has seen a wall before
   @in_middle = false	# indicates that the player is not next to a wall to start off with
+  @@action_map =  { :nothing => "melee", :Captive => "melee", :Wizard => "range", :wall => "melee", :Archer => "range", :Sludge => "melee" }
   
   def play_turn(warrior)
 	if @hit_wall || @in_middle
@@ -34,12 +35,13 @@ class Player
   
   def look_around(warrior)
     @attack_type = "melee"
-	warrior_sight = warrior.look(:backward)
+	warrior_sight = warrior.look
 	warrior_sight.each { |object|
-		if object.to_s == "Captive"
-			break
-		elsif object.to_s == "Wizard"
-			@attack_type = "range"
+		if object.to_s == "nothing"
+			next
+		else
+			key = object.to_s
+			@attack_type = @@action_map[key.to_sym]
 			break
 		end
 	}
