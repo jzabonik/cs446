@@ -3,13 +3,23 @@
 one:
   name: MyString
   breed: MyString
-  age: 1
+  gender: MyString
+  age: MyString
   habits: MyText
   image_url: MyString
 
 two:
   name: MyString
   breed: MyString
-  age: 1
+  gender: MyString
+  age: MyString
   habits: MyText
   image_url: MyString
+  
+monkey:
+  name: Marcelle
+  breed: Monkey
+  gender: Male
+  age: 2 Months
+  habits: Climbs trees
+  image_url: monkey1.jpg
