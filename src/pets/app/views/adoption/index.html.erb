@@ -3,6 +3,10 @@
 <% end %>
 
 <h1>Animal Adoption Catalog</h1>
+<div class="sort_line">
+	<%= link_to 'Sort by Name', controller: "animals", method: :index, :sort => 'name' %>
+	<%= link_to 'Sort by Breed', controller: "animals", method: :index, :sort => 'breed'%>
+</div>
 <% cache ['adoption', Animal.latest] do %>
 	<% @animals.each do |animal| %>
 		<% cache ['entry', animal] do %>

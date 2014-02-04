@@ -4,7 +4,16 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    @animals = Animal.all
+	@sort = params[:sort]
+	if @sort
+		if @sort == 'breed'
+			@animals = Animal.order(:breed)
+		else
+			@animals = Animal.order(:name)
+		end
+	else
+		@animals = Animal.all
+	end
   end
 
   # GET /animals/1

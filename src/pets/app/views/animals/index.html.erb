@@ -1,4 +1,8 @@
 <h1>Listing animals</h1>
+<div class="sort_line">
+	<%= link_to 'Sort by Name', controller: "animals", method: :index, :sort => 'name' %>
+	<%= link_to 'Sort by Breed', controller: "animals", method: :index, :sort => 'breed'%>
+</div>
 <table class=animals>
 <% @animals.each do |animal| %>
 	<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
