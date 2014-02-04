@@ -18,6 +18,7 @@
 					<span class="breed">Breed: <%= animal.breed %></span>
 					<span class="gender">Gender: <%= animal.gender %></span>
 					<span class="age">Age: <%= animal.age %></span>
+					<%= button_to 'Select Me', fosters_path(animal_id: animal)%>
 				</div>
 			</div>
 		<% end %>

@@ -1,4 +1,6 @@
 Pets::Application.routes.draw do
+  resources :fosters
+
   get "adoption/index"
   resources :animals
 
