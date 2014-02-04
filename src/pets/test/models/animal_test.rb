@@ -14,6 +14,17 @@ class AnimalTest < ActiveSupport::TestCase
 		assert animal.errors[:image_url].any?
 	end
 	
+	test "animal is not valid without a unique name" do
+		animal = Animal.new(name: animals(:monkey).name,
+		breed: "y",
+		gender: "yy",
+		age: "1 Month",
+		habits: "yyy",
+		image_url: "fred.gif")
+		assert animal.invalid?
+		assert_equal ["has already been taken"], animal.errors[:name]
+	end
+	
 	def new_product(image_url)
 		Animal.new(name: "My Animal Name",
 		breed: "Animal Type",

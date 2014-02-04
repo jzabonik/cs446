@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AnimalsControllerTest < ActionController::TestCase
   setup do
-    @animal = animals(:one)
+    @animal = animals(:monkey)
 	@update = {
 		name: 'That\'s what they call me',
 		breed: 'We all have one',

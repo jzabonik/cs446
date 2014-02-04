@@ -1,0 +1,21 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Animal Adoption Catalog</h1>
+<% cache ['adoption', Animal.latest] do %>
+	<% @animals.each do |animal| %>
+		<% cache ['entry', animal] do %>
+			<div class="entry">
+				<%= image_tag(animal.image_url) %>
+				<h3><%= animal.name %></h3>
+				<%= sanitize(animal.habits) %>
+				<div class="info_line">
+					<span class="breed">Breed: <%= animal.breed %></span>
+					<span class="gender">Gender: <%= animal.gender %></span>
+					<span class="age">Age: <%= animal.age %></span>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>

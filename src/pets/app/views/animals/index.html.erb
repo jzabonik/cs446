@@ -1,5 +1,5 @@
 <h1>Listing animals</h1>
-<table>
+<table class=animals>
 <% @animals.each do |animal| %>
 	<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 		<td>
