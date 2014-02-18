@@ -17,7 +17,7 @@
 		<span class="age">Age: <%= animal.age %></span>
 	</div>
 	<div class="button_line">
-		<%= button_to "Confirm", new_foster_parent_path(animal_id: @animals), method: :get %>
-		<%= button_to "Cancel", adoption_path, :method => :get %>
+		<%= link_to "Confirm", controller: "foster_parents", action: "new", animal_id: @animals%>
+		<%= link_to "Cancel", adoption_path %>
 	</div>
 </div>

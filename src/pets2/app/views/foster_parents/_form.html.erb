@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, size: 40 %>
@@ -24,8 +23,12 @@
     <%= f.email_field :email, size: 40 %>
   </div>
   <div class="field">
-    <%= f.label :pet_id %><br>
-    <%= f.text_field :pet_id %>
+    <%= f.label :pet_id %>: <br>
+	<% if @animal %>
+		<%= f.text_field :pet_id, value: @animal.name %>
+	<% else %>
+		<%= f.text_field :pet_id %>
+	<% end %>
   </div>
   <div class="actions">
     <%= f.submit 'Foster Pet' %>

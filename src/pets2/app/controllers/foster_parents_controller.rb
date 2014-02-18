@@ -14,6 +14,11 @@ class FosterParentsController < ApplicationController
 
   # GET /foster_parents/new
   def new
+	if params[:animal_id]
+	  @animal = Animal.find(params[:animal_id])
+	else
+	  @animal = Animal.first
+	end
     @foster_parent = FosterParent.new
   end
 
@@ -25,12 +30,8 @@ class FosterParentsController < ApplicationController
   # POST /foster_parents.json
   def create
     @foster_parent = FosterParent.new(foster_parent_params)
-
     respond_to do |format|
-      if @foster_parent.save
-	    Consideration.destroy(session[:consideration_id])
-		session[:consideration_id] = nil
-		
+      if @foster_parent.save		
         format.html { redirect_to adoption_url, notice: 'Thank you for fostering.' }
         format.json { render action: 'show', status: :created, location: @foster_parent }
       else
