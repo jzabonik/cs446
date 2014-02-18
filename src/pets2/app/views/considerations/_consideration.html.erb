@@ -1,0 +1,8 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<h2>Your Consideration List</h2>
+<table>
+  <%= render(consideration.line_items) %>
+</table>
+<%= button_to 'Remove considerations', consideration, method: :delete, data: { confirm: 'Are you sure?' } %>

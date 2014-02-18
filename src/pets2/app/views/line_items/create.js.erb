@@ -1,0 +1,7 @@
+$('#notice').hide();
+
+if ($('#consideration tr').length == 0) { $('#consideration').show('blind', 1000); }
+
+$('#consideration').html("<%= escape_javascript render(@consideration) %>");
+
+$('#current_item').css({'background-color':'#88ff88'}).animate({'background-color':'#f4a460'}, 1000);

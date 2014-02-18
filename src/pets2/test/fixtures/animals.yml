@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  breed: MyString
+  gender: MyString
+  age: MyString
+  habits: MyText
+  image_url: MyString
+  status: MyString
+
+two:
+  name: MyString
+  breed: MyString
+  gender: MyString
+  age: MyString
+  habits: MyText
+  image_url: MyString
+  status: MyString
+  
+monkey:
+  name: Marcelle
+  breed: Monkey
+  gender: Male
+  age: 2 Months
+  habits: Climbs trees
+  image_url: monkey1.jpg
+  status: Available

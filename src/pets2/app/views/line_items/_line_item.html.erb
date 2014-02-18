@@ -1,0 +1,7 @@
+<% if line_item == @current_item %>
+<tr id="current_item">
+<% else %>
+<tr>
+<% end %>
+  <td><%= line_item.animal.name %></td>
+</tr>

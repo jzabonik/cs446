@@ -1,0 +1,19 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Foster Agreement</h1>
+
+<p> By fostering this pet you are agreeing to take the proper care necessary for this animal. If you are found to mistreat this animal in any way, you will be thrown in jail and no one will like you anymore. So just be a good person, mmkay? </p>
+
+<% animal = @animals %>
+<div class="entry">
+	<h3><%= animal.name %></h3>
+	<%= image_tag(animal.image_url) %>
+	<%= sanitize(animal.habits) %>
+	<div class="info_line">
+		<span class="breed">Breed: <%= animal.breed %></span>
+		<span class="gender">Gender: <%= animal.gender %></span>
+		<span class="age">Age: <%= animal.age %></span>
+	</div>
+</div>

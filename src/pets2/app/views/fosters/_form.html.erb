@@ -1,0 +1,17 @@
+<%= form_for(@foster) do |f| %>
+  <% if @foster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@foster.errors.count, "error") %> prohibited this foster from being saved:</h2>
+
+      <ul>
+      <% @foster.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

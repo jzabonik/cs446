@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PetCare Adoption Agency</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='<%= controller.controller_name %>'>
+  <div id="banner">
+    <%= image_tag("logo.png") %>
+    <%= @page_title || "Foster Care" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <% if @consideration %>
+        <%= hidden_div_if(@consideration.line_items.empty?, id: 'consideration') do %>
+          <%= render @consideration %>
+        <% end %>
+      <% end %>
+      <ul>
+        <li><%= link_to "Catalog", controller: "adoption"%></li>
+        <li><%= link_to "Animals", controller: "animals"%></li>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>
