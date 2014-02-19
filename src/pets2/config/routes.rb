@@ -5,6 +5,12 @@ Pets::Application.routes.draw do
 
   resources :considerations
 
+  resources :foster_parents do
+    collection do
+      get :who_fostered
+    end
+  end
+  
   resources :fosters
 
   get "adoption/index"

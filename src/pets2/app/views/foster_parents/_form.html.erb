@@ -25,7 +25,7 @@
   <div class="field">
     <%= f.label :pet_id %>: <br>
 	<% if @animal %>
-		<%= f.text_field :pet_id, value: @animal.name %>
+		<%= f.text_field :pet_id, value: @animal.id %>
 	<% else %>
 		<%= f.text_field :pet_id %>
 	<% end %>

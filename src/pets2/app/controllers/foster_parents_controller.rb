@@ -75,4 +75,10 @@ class FosterParentsController < ApplicationController
     def foster_parent_params
       params.require(:foster_parent).permit(:name, :address, :email, :pet_id)
     end
+	
+	def who_fostered
+	  respond_to do |format|
+	    format.atom
+	  end
+    end
 end
