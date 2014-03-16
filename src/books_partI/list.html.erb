@@ -1,0 +1,21 @@
+<h2>Sorted by <%= sortType %></h2>
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Language</th>
+      <th>Year</th>
+      <th>Copies</th>
+    </tr>
+    <% books.each { |book| %>
+      <tr>
+        <td><%= book[0] %></td>
+        <td><%= book[1] %></td>
+        <td><%= book[2] %></td>
+        <td><%= book[3] %></td>
+        <td><%= book[4] %></td>
+        <td><%= book[5] %></td>
+      <tr>
+	<% } %>
+  </table>

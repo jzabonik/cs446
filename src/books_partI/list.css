@@ -1,0 +1,26 @@
+header h1 {
+  color: darkblue;
+}
+
+body table{                /* Setting the border for the outside of the table */
+    border: 5px solid #000066;
+    border-spacing: 0px;
+    margin-top: 10px;
+}
+body th, td {            /* Setting the borders and padding for all the cells in the table */
+    border: 1px solid #000066;
+    padding: 5px;
+}
+body th {                /* Setting the header cells of the schedule table */
+    text-align: center;
+    background-color: #eaeaea;
+    font-weight: bold;
+    font-size: 22px;
+}
+body td {                    /* Setting the regular cells of the schedule table */
+    text-align: left;
+}
+
+footer p {
+  color: darkblue;
+}
