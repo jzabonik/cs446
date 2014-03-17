@@ -1,0 +1,21 @@
+<h2>Sorted by <%= @sort %></h2>
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Language</th>
+      <th>Year</th>
+      <th>Copies</th>
+    </tr>
+    <% @books.each { |book| %>
+      <tr>
+        <td><%= book.id %></td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.language %></td>
+        <td><%= book.published %></td>
+        <td><%= book.sold %></td>
+      <tr>
+	<% } %>
+  </table>
